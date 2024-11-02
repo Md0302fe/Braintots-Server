@@ -109,12 +109,11 @@ const updateProduct = (id, data) => {
           message: `Không tìm thấy id sản phẩm !`,
         });
       }
-
       // gọi và update user by id + data cần update , nếu muốn trả về object mới cập nhật thì cần thêm {new:true}
       const updateProduct = await Product.findByIdAndUpdate(id, data, {
         new: true,
+        runValidators: true
       });
-
       return resolve({
         status: "OK",
         message: "Cập nhật sản phẩm thành công",
@@ -217,7 +216,8 @@ const getAllProduct = (limit, page, sort, filter) => {
               [label]: objectIdValue,
             })
               .limit(limit)
-              .skip(page * limit);
+              .skip(page * limit)
+              .sort({ createdAt: -1 }); // Sắp xếp theo ngày tạo giảm dần
             return resolve({
               status: "OK",
               message: "Get All Product Filter Success",
@@ -234,7 +234,8 @@ const getAllProduct = (limit, page, sort, filter) => {
             [label]: { $regex: value },
           })
             .limit(limit)
-            .skip(page * limit);
+            .skip(page * limit)
+            .sort({ createdAt: -1 }); // Sắp xếp theo ngày tạo giảm dần
           return resolve({
             status: "OK",
             message: "Get All Product Filter Success",
@@ -254,7 +255,8 @@ const getAllProduct = (limit, page, sort, filter) => {
         const allProductSort = await Product.find()
           .limit(limit) // .limit() : quản lý số lượng items được get ra từ db.
           .skip(page * limit) // .skip() : là số phần từ cần next qua (công thức dựa trên item/page và số trang hiện tại)
-          .sort(objectSort);
+          .sort(objectSort)
+          
         return resolve({
           status: "OK",
           message: "Get All Sort Product Success",
@@ -268,8 +270,8 @@ const getAllProduct = (limit, page, sort, filter) => {
       const allProduct = await Product.find()
         .limit(limit)
         .skip(page * limit)
+        .sort({ createdAt: -1 }) // Sắp xếp theo ngày tạo giảm dần
         .populate("type");
-
       return resolve({
         status: "OK",
         message: "Get All Product Success",

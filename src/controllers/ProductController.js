@@ -13,6 +13,7 @@ const createProduct = async (req, res) => {
       countInStock,
       rating,
       description,
+      discount ,
     } = req.body;
 
     if (
@@ -145,7 +146,7 @@ const getAllProduct = async (req, res) => {
   try {
     // Lưu ý , với mỗi key query được sử dụng 2 lần thì nó sẽ có dạng array []
     const { limit, page, sort, filter } = req.query;
-
+   
     const respone = await ProductService.getAllProduct(
       +limit || 6,
       +page || 0,
