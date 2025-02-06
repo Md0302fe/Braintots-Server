@@ -21,15 +21,17 @@ const orderSchema = new mongoose.Schema(
     shippingAddress: {
       fullName: { type: String, required: true }, // tên người dùng
       address: { type: String, required: true }, // địa chỉ người dùng
-      city: { type: String, required: true }, // thành phố đang sinh sống
+      // city: { type: String, required: true }, // thành phố đang sinh sống
       phone: { type: Number, required: true }, // số điện thoại liên lạc
     },
+
     // Một số thông tin đơn hàng khác
     paymentMethod: { type: String, required: true }, // phương thức thanh toán
     itemsPrice: { type: Number, required: true }, // giá trị sản phẩm cần thanh toán
     shippingPrice: { type: Number, required: true }, // chi phí vận chuyển
     taxPrice: { type: Number, required: true }, // chi phí thuế
     totalPrice: { type: Number, required: true }, // tổng chi phí cần thanh toán
+
     // người mua sản phẩm
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -38,9 +40,11 @@ const orderSchema = new mongoose.Schema(
     },
 
     isPaid: { type: Boolean, default: false }, // đã thanh toán hay chưa
-    paidAt: { type: Date }, // thanh toán tại (Ngày ?)
+    paidAt: { type: String }, // thanh toán tại (Ngày ?)
     isDelivered: { type: Boolean, default: false }, // đã vận chuyển hay chưa
-    deliveredAt: { type: Date }, // vận chuyển tại (Ngày?)
+    deliveredAt: { type: String }, // vận chuyển tại (Ngày?)
+    status: { type: String, default: "" }, // trạng thái của đơn hàng
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true,

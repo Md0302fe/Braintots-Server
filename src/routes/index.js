@@ -1,6 +1,7 @@
 //Dòng này dùng để import UserRouter từ file ./UserRouter. File này chứa tất cả các route liên quan đến người dùng (user), ví dụ như các API cho việc đăng ký, đăng nhập, cập nhật thông tin người dùng, v.v.
 const UserRouter = require("./UserRouter");
 const ProductRouter = require("./ProductRouter");
+const OrderRouter = require("./OrderRouter");
 
 //  Định nghĩa hàm routes
 //  Đây là một hàm nhận vào đối tượng app (chính là instance của ứng dụng Express).
@@ -10,6 +11,10 @@ const routes = (app) => {
 
   // Tất cả các endpoint được định nghĩa trong ProductRouter sẽ có tiền tố /api/product.
   app.use("/api/product", ProductRouter);
+
+ // Tất cả các endpoint được định nghĩa trong OrderRouter sẽ có tiền tố /api/order.
+  app.use("/api/order", OrderRouter)
+
 };
 module.exports = routes;
 
