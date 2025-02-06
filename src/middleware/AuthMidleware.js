@@ -4,6 +4,7 @@ dotenv.config(); // process.env
 
 const authMidleware = async (req, res, next) => {
   // verify a token symmetric
+
   const stringToken = req.headers.token.split(" ");
   const token = stringToken[1];
 
