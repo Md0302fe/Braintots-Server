@@ -145,15 +145,21 @@ const deleteManyProduct = async (req, res) => {
 const getAllProduct = async (req, res) => {
   try {
     // Lưu ý , với mỗi key query được sử dụng 2 lần thì nó sẽ có dạng array []
-    const { limit, page, sort, filter } = req.query;
-   
-    const respone = await ProductService.getAllProduct(
-      +limit || 6,
-      +page || 0,
-      sort,
-      filter
-    );
+    const respone = await ProductService.getAllProduct();
 
+    // Log API Check
+    return res.status(200).json(respone);
+  } catch (error) {
+    return res.status(404).json({
+      eMsg: error,
+    });
+  }
+};
+
+// Phương Thức Get All PRODUCT
+const adminGetAllProduct = async (req, res) => {
+  try {
+    const respone = await ProductService.adminGetAllProduct();
     // Log API Check
     return res.status(200).json(respone);
   } catch (error) {
@@ -186,6 +192,7 @@ module.exports = {
   deleteManyProduct,
   createCategory,
   getAllCategory,
+  adminGetAllProduct,
 };
 
 // File này nằm trong Controller / Folder điều khiển
