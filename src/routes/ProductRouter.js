@@ -37,6 +37,9 @@ router.delete(
 // # GET-ALL - PRODUCTS / GET
 router.get("/get-all", ProductController.getAllProduct);
 
+// # GET-ALL - PRODUCTS / GET
+router.get("/admin-get-all", ProductController.adminGetAllProduct);
+
 // # GET-ALL - CATEGORY / GET
 router.get("/get-all-category", ProductController.getAllCategory);
 

@@ -112,7 +112,7 @@ const updateProduct = (id, data) => {
       // gọi và update user by id + data cần update , nếu muốn trả về object mới cập nhật thì cần thêm {new:true}
       const updateProduct = await Product.findByIdAndUpdate(id, data, {
         new: true,
-        runValidators: true
+        runValidators: true,
       });
       return resolve({
         status: "OK",
@@ -255,8 +255,8 @@ const getAllProduct = (limit, page, sort, filter) => {
         const allProductSort = await Product.find()
           .limit(limit) // .limit() : quản lý số lượng items được get ra từ db.
           .skip(page * limit) // .skip() : là số phần từ cần next qua (công thức dựa trên item/page và số trang hiện tại)
-          .sort(objectSort)
-          
+          .sort(objectSort);
+
         return resolve({
           status: "OK",
           message: "Get All Sort Product Success",
@@ -278,6 +278,26 @@ const getAllProduct = (limit, page, sort, filter) => {
         totalItems: totalProduct,
         currentPage: page + 1,
         totalPage: totalPage,
+        data: allProduct,
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+// Hàm Get All PRODUCT -- Sort Sản Phẩm -- Filter Sản Phẩm
+const adminGetAllProduct = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const allProduct = await Product.find()
+        .sort({ createdAt: -1 }) // Sắp xếp theo ngày tạo giảm dần
+        .populate("type");
+      
+      console.log("AllProduct => ", allProduct)
+      return resolve({
+        status: "OK",
+        message: "Get All Product Success",
         data: allProduct,
       });
     } catch (error) {
@@ -311,6 +331,7 @@ module.exports = {
   deleteManyProduct,
   createCategory,
   getAllCategory,
+  adminGetAllProduct,
 };
 
 // File services này là file dịch vụ /
