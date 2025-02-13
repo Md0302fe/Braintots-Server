@@ -2,7 +2,7 @@ const Order = require("../models/Order");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const {} = require("../services/JwtService");
 

@@ -1,6 +1,6 @@
 const Product = require("../models/ProductModel");
 const Category = require("../models/ProductCategory");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
